@@ -1,0 +1,60 @@
+﻿ 
+@{
+    ViewBag.Title = "Add";
+}
+
+
+<h2>Add Orders</h2>
+
+@* method="get" ka laganai k baad...
+    https.//localhost:44301/Product/Add?email=lubnakhizar24%40gmail.com&password=1234
+    '?' k baad wali value ko quere parameter kehtai ha*@
+@*action="/Controller/Action"*@
+
+<div class="container">
+    <div class="col-lg-4 col-lg-push-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Add Order
+                <div class="panel-body">
+                    <form action="/Order/Add" method="post">
+
+                        <div class="form-group">
+                            <label for="orderstatus">OrderStatus Id:</label>
+                            <input type="number" class="form-control" id="orderstatus" name="OrderStatusId">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="buyer">Buyer Id:</label>
+                            <input type="number" class="form-control" id="buyer" name="BuyerId">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="product">Product Id:</label>
+                            <input type="number" class="form-control" id="product" name="ProductId">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="date">DateTime:</label>
+                            <input type="DateTime" class="form-control" id="datetime" name="DateTime">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="id">Id</label>
+                            <input type="number" class="form-control" id="id" name="Id">
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+

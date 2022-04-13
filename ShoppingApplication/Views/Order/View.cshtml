@@ -1,0 +1,49 @@
+﻿@using ShoppingApplication.Models
+@model Order
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View Page</h2>
+
+
+
+<div>
+
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Orders </div>
+            <div class="panel-body">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>DateTime</th>
+                            <th>OrderStatus</th>
+                            <th>Buyer</th>
+                            <th>Product</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr style="background-color:#a9e8f1">
+
+                            <td>@Model.Id </td>
+                            <td>@Model.DateTime</td>
+                            <td>@Model.OrderStatusId</td>
+                            <td>@Model.BuyerId</td>
+                            <td>@Model.ProductId</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -9,8 +9,9 @@ namespace ShoppingApplication.Models
 {
     public class ShoppingContext:DbContext
     {
-      //  1- base mai connection string pass ki....
-        public ShoppingContext():base("Connection String")
+        //  1- base mai connection string pass ki....jo naam connection string
+        //  mai name="ConnectionString" likha ha wohi base mai likhna ha without space...
+        public ShoppingContext():base("ConnectionString")
         {
 
         }
