@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div class="container">
+    <div class="col-lg-4 col-lg-push-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Login </div>
+            <div class="panel-body">
+                @if (ViewBag.Error != "")
+                {
+                    <p style="color:red">@ViewBag.Error</p>
+                }
+
+              
+                <form action="/Account/Login" method="post">
+                    <!-- Email input -->
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email address</label>
+                        <input type="text" class="form-control" id="email" name="Email" />
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="Password" />
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col d-flex justify-content-center">
+                           
+                        </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                    @*<button type="submit" class="btn btn-primary"> Submit</button>*@
+
+                    <div class="text-center">
+                        <p>Not a member? <a href="/Account/Register">Register</a></p>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿
+
+@using ShoppingApplication.Models
+@model List<Role>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Roles</h2>
+<br />
+<div>
+
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Roles (  <a href="/Role/Add" style="color:#2f107c"> <b>Add</b> </a>)</div>
+            <div class="panel-body">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>                      
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.Id </td>
+                                <td>@item.Name</td>
+                                
+                                <td>
+                                    <a href="/Role/View/@item.Id"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                                    <a href="/Role/Edit/@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
+                                    <a href="/Role/Delete/@item.Id"><span class="glyphicon glyphicon-trash"></span></a> |
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+

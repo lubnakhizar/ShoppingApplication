@@ -1,10 +1,10 @@
-﻿ 
+﻿
 @{
     ViewBag.Title = "Add";
 }
 
 
-<h2>Add Orders</h2>
+<h2>Add Users</h2>
 
 @* method="get" ka laganai k baad...
     https.//localhost:44301/Product/Add?email=lubnakhizar24%40gmail.com&password=1234
@@ -15,28 +15,13 @@
     <div class="col-lg-4 col-lg-push-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                Add Order
+                Add User
                 <div class="panel-body">
-                    <form action="/Order/Add" method="post">
+                    <form action="/User/Add" method="post">
 
                         <div class="form-group">
-                            <label for="orderstatusid">OrderStatus Id:</label>
-                            <input type="number" class="form-control" id="orderstatusid" name="OrderStatusId">
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <label for="buyerid">Buyer Id:</label>
-                            <input type="number" class="form-control" id="buyerid" name="BuyerId">
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <label for="productid">Product Id:</label>
-                            <input type="number" class="form-control" id="productid" name="ProductId">
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            <label for="datetime">DateTime:</label>
-                            <input type="DateTime" class="form-control" id="datetime" name="DateTime">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="Name">
                         </div>
                         <br />
                         <div class="form-group">
@@ -44,6 +29,23 @@
                             <input type="number" class="form-control" id="id" name="Id">
                         </div>
                         <br />
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="Email">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="text" class="form-control" id="password" name="Password">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="roleid">Role Id:</label>
+                            <input type="number" class="form-control" id="roleid" name="RoleId">
+                        </div>
+                    
+                        <br />
+
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>
 

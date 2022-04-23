@@ -1,0 +1,45 @@
+﻿@using ShoppingApplication.Models
+@model ProductImage
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View Products</h2>
+
+
+
+<div>
+
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">ProductImages </div>
+            <div class="panel-body">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>                            
+                            <th>Image</th>
+                            <th>ProductId</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr style="background-color:#a9e8f1">
+
+                            <td>@Model.Id </td>
+                            <td>@Model.Image</td>
+                            <td>@Model.ProductId</td>
+                         
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

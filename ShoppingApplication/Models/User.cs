@@ -15,7 +15,10 @@ namespace ShoppingApplication.Models
 
         public string Password { get; set; }
 
+        public string AccessToken { get; set; }
+
         public virtual Role Role { get; set; }
         public int RoleId { get; set; }
+
     }
 }

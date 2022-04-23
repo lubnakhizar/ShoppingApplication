@@ -1,28 +1,27 @@
 ﻿
 
 @using ShoppingApplication.Models
-@model List<Product>
+@model List<User>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Products</h2>
+<h2>Users</h2>
 <br />
 <div>
 
     <div class="container">
         <div class="panel panel-primary">
-            <div class="panel-heading">Products (  <a href="/Product/Add" style="color:#2f107c"> <b>Add</b> </a>)</div>
+            <div class="panel-heading">Users (  <a href="/User/Add" style="color:#2f107c"> <b>Add</b> </a>)</div>
             <div class="panel-body">
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>SellerId</th>
-                            <th>ProductStatusId</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>RoleId</th>                         
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -31,17 +30,16 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-
                                 <td>@item.Id </td>
                                 <td>@item.Name</td>
-                                <td>@item.Description</td>
-                                <td>@item.Image</td>
-                                <td>@item.SellerId</td>
-                                <td>@item.ProductStatusId</td>
+                                <td>@item.Email</td>
+                                <td>@item.Password</td>
+                                <td>@item.RoleId</td>
+                          
                                 <td>
-                                    <a href="/Product/View/@item.Id"><span class="glyphicon glyphicon-eye-open"></span></a> |
-                                    <a href="/Product/Edit/@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
-                                    <a href="/Product/Delete/@item.Id"><span class="glyphicon glyphicon-trash"></span></a> |
+                                    <a href="/User/View/@item.Id"><span class="glyphicon glyphicon-eye-open"></span></a> |
+                                    <a href="/User/Edit/@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
+                                    <a href="/User/Delete/@item.Id"><span class="glyphicon glyphicon-trash"></span></a> |
                                 </td>
                             </tr>
                         }

@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class intial : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -33,6 +33,7 @@
                         Name = c.String(),
                         Email = c.String(),
                         Password = c.String(),
+                        AccessToken = c.String(),
                         RoleId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

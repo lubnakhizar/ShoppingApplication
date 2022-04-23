@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ShoppingApplication.Controllers
 {
+    [Buyer]
     public class OrderController : Controller
     {
         ShoppingContext db = new ShoppingContext();
@@ -31,6 +32,7 @@ namespace ShoppingApplication.Controllers
             db.SaveChanges();
             return Redirect("/Order/Index"); // view banana hi nai ,remove ho kr redirect chala jai ga...
         }
+        // Add Order
         [HttpGet]
         public ActionResult Add()
         {

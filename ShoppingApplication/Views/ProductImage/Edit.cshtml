@@ -1,0 +1,46 @@
+﻿@using ShoppingApplication.Models
+@model ProductImage
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit ProductImage</h2>
+
+
+<div class="container">
+    <div class="col-lg-4 col-lg-push-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Edit ProductImage
+                <div class="panel-body">
+                    <form action="/ProductImage/Edit" method="post">
+
+                        <br />
+                        <div class="form-group">
+                            <label>Id</label>
+                            <input type="number" class="form-control" id="id" name="Id" value="@Model.Id">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="image">Image:</label>
+                            <input type="text" class="form-control" id="image" name="Image" value="@Model.Image">
+                        </div>
+                        <div class="form-group">
+                            <label for="productid">Product Id:</label>
+                            <input type="number" class="form-control" id="productid" name="ProductId" value="@Model.ProductId">
+                        </div>
+                      
+                        <br />
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

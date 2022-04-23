@@ -1,136 +1,69 @@
-﻿using System;
+﻿using ShoppingApplication.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ShoppingApplication.Models;
 
 namespace ShoppingApplication.Controllers
 {
+    [Buyer]
     public class ProductController : Controller
     {
-        private ShoppingContext db = new ShoppingContext();
-
+        ShoppingContext db = new ShoppingContext();
         // GET: Product
+      
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.ProductStatus).Include(p => p.Seller);
-            return View(products.ToList());
+            List<Product> products = db.Products.ToList();
+            return View(products);
         }
-
-        // GET: Product/Details/5
-        public ActionResult Details(int? id)
+        //View Product
+        public ActionResult View(int Id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
+            Product products = db.Products.Where(x => x.Id == Id).FirstOrDefault();
+            return View(products);
         }
-
-        // GET: Product/Create
-        public ActionResult Create()
+        //Delete Product
+        public ActionResult Delete(int Id)
         {
-            ViewBag.ProductStatusId = new SelectList(db.ProductStatuses, "Id", "Name");
-            ViewBag.SellerId = new SelectList(db.Users, "Id", "Name");
+            Product products = db.Products.Where(x => x.Id == Id).FirstOrDefault();
+            db.Products.Remove(products);
+            db.SaveChanges();
+            return Redirect("/Product/Index"); // view banana hi nai ,remove ho kr redirect chala jai ga...
+        }
+        //Add Products
+        [HttpGet]
+        public ActionResult Add()
+        {
             return View();
         }
-
-        // POST: Product/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Image,SellerId,ProductStatusId")] Product product)
+        public ActionResult Add(Product product)
         {
-            if (ModelState.IsValid)
-            {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ProductStatusId = new SelectList(db.ProductStatuses, "Id", "Name", product.ProductStatusId);
-            ViewBag.SellerId = new SelectList(db.Users, "Id", "Name", product.SellerId);
-            return View(product);
-        }
-
-        // GET: Product/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ProductStatusId = new SelectList(db.ProductStatuses, "Id", "Name", product.ProductStatusId);
-            ViewBag.SellerId = new SelectList(db.Users, "Id", "Name", product.SellerId);
-            return View(product);
-        }
-
-        // POST: Product/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Image,SellerId,ProductStatusId")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ProductStatusId = new SelectList(db.ProductStatuses, "Id", "Name", product.ProductStatusId);
-            ViewBag.SellerId = new SelectList(db.Users, "Id", "Name", product.SellerId);
-            return View(product);
-        }
-
-        // GET: Product/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
-        // POST: Product/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            db.Products.Add(product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("/Product/Index");
         }
-
-        protected override void Dispose(bool disposing)
+        //Edit Product
+        [HttpGet]
+        public ActionResult Edit(int Id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            Product product = db.Products.Where(x => x.Id == Id).FirstOrDefault();
+            return View(product);
+        }
+        [HttpPost]
+        public ActionResult Edit(Product product) // fill kr k bhji ha
+        {
+            Product dbProduct = db.Products.Where(x => x.Id == product.Id).FirstOrDefault(); // or yai jo abhi get ki ha.
+            dbProduct.Name = product.Name;
+            dbProduct.Description = product.Description;
+            dbProduct.Image = product.Image;
+            dbProduct.ProductStatusId = product.ProductStatusId;
+            dbProduct.SellerId = product.SellerId;
+            dbProduct.Id = product.Id;
+            db.SaveChanges();
+            return Redirect("/Product/Index");
         }
     }
 }
