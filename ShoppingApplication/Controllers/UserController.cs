@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ShoppingApplication.Controllers
 {
-    [Admin]
+    //  [Admin]    // Comment this Secure Action 
     public class UserController : Controller
     {
         ShoppingContext db = new ShoppingContext();
@@ -40,6 +40,8 @@ namespace ShoppingApplication.Controllers
         [HttpGet]
         public ActionResult Add()
         {
+            // add the dropdown...
+            ViewBag.Roles = db.Roles.ToList();
             return View();
         }
         public ActionResult Add(User user)
@@ -53,6 +55,8 @@ namespace ShoppingApplication.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
+            // add the dropdown...
+            ViewBag.Roles = db.Roles.ToList();
             User user = db.Users.Where(x => x.Id == Id).FirstOrDefault();
             return View(user);
         }

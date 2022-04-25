@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ShoppingApplication.Controllers
 {
-    [Admin]
+    // [Admin]        // Comment this Secure Action 
     public class RoleController : Controller
     {
         ShoppingContext db = new ShoppingContext();

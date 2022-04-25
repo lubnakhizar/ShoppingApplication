@@ -3,7 +3,12 @@
 
 @{
     ViewBag.Title = "Edit";
+    // Map the list of OrderStatus, product  and buyers for dropdown...
+    List<Product> Products = ViewBag.Products as List<Product>;
+    List<OrderStatus> OrderStatuses = ViewBag.OrderStatuses as List<OrderStatus>;
+    List<User> Buyers = ViewBag.Buyers as List<User>;
 }
+
 
 <h2>Edit Order</h2>
 
@@ -15,11 +20,10 @@
                 Edit Order
                 <div class="panel-body">
                     <form action="/Order/Edit" method="post">
-                        
+
                         <br />
                         <div class="form-group">
-                            <label>Id</label>
-                            <input type="number" class="form-control" id="id" name="Id" value="@Model.Id">
+                            <input type="hidden" class="form-control" id="id" name="Id" value="@Model.Id">
                         </div>
                         <div class="form-group">
                             <label>DateTime:</label>
@@ -27,17 +31,35 @@
                         </div>
                         <br />
                         <div class="form-group">
-                            <label>OrderStatusId:</label>
-                            <input type="number" class="form-control" id="orderstatusid" name="OrderStatusId" value="@Model.OrderStatusId">
+                            <label>OrderStatus:</label>
+                            <select name="OrderStatusId" class="form-control">
+
+                                @foreach (var item in OrderStatuses)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
                         </div>
                         <br />
                         <div class="form-group">
-                            <label>BuyerId:</label>
-                            <input type="number" class="form-control" id="buyerid" name="BuyerId" value="@Model.BuyerId">
+                            <label>Buyer:</label>
+                            <select name="BuyerId" class="form-control">
+                                
+                                @foreach (var item in Buyers)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>ProductId:</label>
-                            <input type="number" class="form-control" id="productid" name="ProductId" value="@Model.ProductId">
+                            <label>Product Id:</label>
+                            <select name="ProductId" class="form-control">
+                              
+                                @foreach (var item in Products)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
                         </div>
                         <br />
                         <button type="submit" class="btn btn-success">Submit</button>

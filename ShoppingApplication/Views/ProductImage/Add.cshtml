@@ -1,6 +1,8 @@
 ﻿
+@using ShoppingApplication.Models
 @{
     ViewBag.Title = "Add";
+    List<Product> Products = ViewBag.Products as List<Product>;
 }
 
 
@@ -19,22 +21,25 @@
                 <div class="panel-body">
                     <form action="/ProductImage/Add" method="post">
 
-                      
-                        <div class="form-group">
-                            <label for="id">Id</label>
-                            <input type="number" class="form-control" id="id" name="Id">
-                        </div>
+
+                        <input type="hidden" class="form-control" id="id" name="Id">
                         <br />
-                       
+
                         <div class="form-group">
                             <label for="image">Image:</label>
                             <input type="text" class="form-control" id="image" name="Image">
                         </div>
                         <br />
                         <div class="form-group">
-                            <label for="productid">Product Id:</label>
-                            <input type="number" class="form-control" id="productid" name="ProductId">
-                        </div>                   
+                            <label>Product Id:</label>
+                            <select name="ProductId" class="form-control">
+                                <option value="0">Select Status</option>
+                                @foreach (var item in Products)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
                         <br />
 
                         <button type="submit" class="btn btn-success">Submit</button>

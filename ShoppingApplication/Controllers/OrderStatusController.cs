@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ShoppingApplication.Controllers
 {
-    [Seller]
+   // [Seller]
     public class OrderStatusController : Controller
     {
         ShoppingContext db = new ShoppingContext();

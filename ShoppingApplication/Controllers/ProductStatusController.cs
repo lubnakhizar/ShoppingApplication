@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ShoppingApplication.Controllers
 {
-    [Seller]    // make seller
+    //  [Seller]    // make seller  // Comment this Secure Action 
     public class ProductStatusController : Controller
     {
         ShoppingContext db = new ShoppingContext();

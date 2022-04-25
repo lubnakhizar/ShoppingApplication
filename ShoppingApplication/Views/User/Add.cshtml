@@ -1,6 +1,8 @@
-﻿
+﻿@using ShoppingApplication.Models
 @{
     ViewBag.Title = "Add";
+    // Map the list of Roles for dropdown...
+    List<Role> Roles = ViewBag.Roles as List<Role>;
 }
 
 
@@ -24,10 +26,7 @@
                             <input type="text" class="form-control" id="name" name="Name">
                         </div>
                         <br />
-                        <div class="form-group">
-                            <label for="id">Id</label>
-                            <input type="number" class="form-control" id="id" name="Id">
-                        </div>
+                        <input type="hidden" class="form-control" id="id" name="Id">
                         <br />
                         <div class="form-group">
                             <label for="email">Email:</label>
@@ -36,14 +35,21 @@
                         <br />
                         <div class="form-group">
                             <label for="password">Password:</label>
-                            <input type="text" class="form-control" id="password" name="Password">
+                            <input type="password" class="form-control" id="password" name="Password">
                         </div>
                         <br />
                         <div class="form-group">
-                            <label for="roleid">Role Id:</label>
-                            <input type="number" class="form-control" id="roleid" name="RoleId">
+                            <label>Role Id:</label>
+                            <select name="RoleId" class="form-control">
+                                <option >Select Role</option>
+                                @foreach (var item in Roles)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
                         </div>
-                    
+                        <br />
+
                         <br />
 
                         <button type="submit" class="btn btn-success">Submit</button>

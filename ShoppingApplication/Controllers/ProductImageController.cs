@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ShoppingApplication.Controllers
 {
-    [Admin]
+    // [Admin]        // Comment this Secure Action 
     public class ProductImageController : Controller
     {
         ShoppingContext db = new ShoppingContext();
@@ -35,6 +35,8 @@ namespace ShoppingApplication.Controllers
         [HttpGet]
         public ActionResult Add()
         {
+            // Add dropdown
+            ViewBag.Products = db.Products.ToList();
             return View();
         }
         [HttpPost]
@@ -49,6 +51,8 @@ namespace ShoppingApplication.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
+            // Add dropdown
+            ViewBag.Products = db.Products.ToList();
             ProductImage productimage = db.ProductImages.FirstOrDefault(x => x.Id == Id);
             return View(productimage);
         }

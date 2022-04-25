@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ShoppingApplication.Controllers
 {
-    [Buyer]
+    //[Buyer]// Comment this Secure Action
     public class ProductController : Controller
     {
         ShoppingContext db = new ShoppingContext();
@@ -36,6 +36,9 @@ namespace ShoppingApplication.Controllers
         [HttpGet]
         public ActionResult Add()
         {
+            // add the dropdown...
+            ViewBag.ProductStatuses = db.ProductStatuses.ToList();
+            ViewBag.Sellers = db.Users.Where(x=>x.RoleId==2).ToList();
             return View();
         }
         [HttpPost]
@@ -49,6 +52,9 @@ namespace ShoppingApplication.Controllers
         [HttpGet]
         public ActionResult Edit(int Id)
         {
+            // add the dropdown...
+            ViewBag.ProductStatuses = db.ProductStatuses.ToList();
+            ViewBag.Sellers = db.Users.Where(x => x.RoleId == 2).ToList();
             Product product = db.Products.Where(x => x.Id == Id).FirstOrDefault();
             return View(product);
         }
