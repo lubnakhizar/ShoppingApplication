@@ -15,7 +15,11 @@ namespace ShoppingApplication.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            List<Order> orders = db.Orders.ToList();
+            // kisi user ko srf usi ka order dikhaanai k liyai naa k yai ho k wo sarai orders ki list dikhaa dai..
+            User user = new AccountController().GetUser(Request);
+            List<Order> orders = db.Orders.Where(x => x.BuyerId == user.Id).ToList();
+
+           // List<Order> orders = db.Orders.ToList();
             return View(orders);
         }
         //View Order
@@ -45,9 +49,33 @@ namespace ShoppingApplication.Controllers
         [HttpPost]
         public ActionResult Add(Order order)
         {
+            // add the dropdown...
+            ViewBag.OrderStatuses = db.OrderStatuses.ToList();
+            ViewBag.Buyers = db.Users.Where(x => x.RoleId == 3).ToList();
+            ViewBag.Products = db.Products.ToList();
             db.Orders.Add(order);
             db.SaveChanges();
             return Redirect("/Order/Index");
+        }  
+        //Place a  order......
+        public ActionResult Add(int Id)
+        {
+            // kisi user ko srf usi ka order dikhaanai k liyai naa k yai ho k wo sarai orders ki list dikhaa dai..
+            User user = new AccountController().GetUser(Request);
+            Order order = new Order
+            {
+                BuyerId = user.Id,
+                OrderStatusId = 1,
+                DateTime = DateTime.UtcNow.AddHours(6),
+                ProductId = Id
+            };
+      
+            db.Orders.Add(order);
+            db.SaveChanges();
+            return Redirect("/Order/Index");
+
+            //yai view mai lik dena..nichai wala
+            // <a href="/Order/Add/@Model.Id">Buy Now </a>
         }
 
 

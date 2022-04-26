@@ -1,8 +1,10 @@
 ﻿@using ShoppingApplication.Models
+@using System.Web.Hosting
 @model Product
 
 @{
     ViewBag.Title = "View";
+  
 }
 
 <h2>View Products</h2>
@@ -21,7 +23,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Image</th>
+                         @*   <th>Image</th>*@
                             <th>SellerId</th>
                             <th>ProductStatusId</th>
 
@@ -35,7 +37,7 @@
                             <td>@Model.Id </td>
                             <td>@Model.Name</td>
                             <td>@Model.Description</td>
-                            <td>@Model.Image</td>
+                         @*   <td>@Model.Image</td>*@
                             <td>@Model.SellerId</td>
                             <td>@Model.ProductStatusId</td>
 
@@ -43,9 +45,27 @@
 
                     </tbody>
                 </table>
+
             </div>
 
         </div>
+    <div>
+          @*Place a Order*@
+        <p><b> Place your Order </b></p>
+        <a href="/Order/Add/@Model.Id"><b>Buy Now </b></a>
+    </div>
+
+    <div>
+        @*Image Uploaded*@
+        @*  <img src="@Model.Image" alt="Alternate Text" height="300" width="120" />*@
+        <br />
+        <b> Product Image</b>
+        <br /> <br />
+        <div>
+            <img src="@Model.Image" style="height:310px; width:auto" />
+        </div>
+    </div>
+
 
     </div>
 </div>

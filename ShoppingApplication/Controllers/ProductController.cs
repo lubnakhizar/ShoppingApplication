@@ -1,8 +1,11 @@
 ﻿using ShoppingApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace ShoppingApplication.Controllers
@@ -21,8 +24,9 @@ namespace ShoppingApplication.Controllers
         //View Product
         public ActionResult View(int Id)
         {
-            Product products = db.Products.Where(x => x.Id == Id).FirstOrDefault();
-            return View(products);
+            Product product = db.Products.Where(x => x.Id == Id).FirstOrDefault(); 
+            product.Image= GetImageBytes($"{Server.MapPath("~/App_Data")}{product.Image}");           
+            return View(product);
         }
         //Delete Product
         public ActionResult Delete(int Id)
@@ -41,9 +45,26 @@ namespace ShoppingApplication.Controllers
             ViewBag.Sellers = db.Users.Where(x=>x.RoleId==2).ToList();
             return View();
         }
-        [HttpPost]
-        public ActionResult Add(Product product)
+        [HttpPost]                             // , Map the file we upload...
+        public ActionResult Add(Product product, HttpPostedFileBase file)
         {
+            // Check Laga rhai ha k image ka size itna hona chahiyai...
+            if(file.ContentLength > 5242880)
+            {
+                ViewBag.Error = "Your file is above 5MB";
+                ViewBag.ProductStatuses = db.ProductStatuses.ToList();
+                ViewBag.Sellers = db.Users.Where(x => x.RoleId == 2).ToList();
+                return View();
+            }
+
+
+            //Firstly,we give the path to server which automatically access the image path where actually image is placed.
+            //  DateTime.UtcNow.Ticks + ".jpg" -> yai dynamic image k hr dafa unique image k naam ho ...
+
+            string filename =  DateTime.UtcNow.Ticks + ".jpg";
+            file.SaveAs(Server.MapPath("~/App_Data/Images/") + filename);
+            product.Image = "/Images/"+filename;       // Image save hogii
+
             db.Products.Add(product);
             db.SaveChanges();
             return Redirect("/Product/Index");
@@ -70,6 +91,27 @@ namespace ShoppingApplication.Controllers
             dbProduct.Id = product.Id;
             db.SaveChanges();
             return Redirect("/Product/Index");
+        }
+
+        // Secure the Image Folder App_Data
+        public static string GetImageBytes(string path)
+        {
+            try
+            {
+                using (Image image = Image.FromFile(path))
+                {
+                    using (MemoryStream m = new MemoryStream())
+                    {
+                        image.Save(m, image.RawFormat);
+                        return @String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(m.ToArray()));
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
         }
     }
 }

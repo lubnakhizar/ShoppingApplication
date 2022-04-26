@@ -19,10 +19,14 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 Add Product
-                <div class="panel-body">
-                    <form action="/Product/Add" method="post">
+                <div class="panel-body"> 
+                    @if (ViewBag.Error != "")
+                    {
+                    <p style="color:red">@ViewBag.Error </p>
+                    }
+                            <form action="/Product/Add" method="post" enctype="multipart/form-data">
 
-                            <input type="hidden" class="form-control" id="id" name="Id">
+                        <input type="hidden" class="form-control" id="id" name="Id">
 
                         <div class="form-group">
                             <label for="name">Name:</label>
@@ -35,11 +39,7 @@
                             <input type="text" class="form-control" id="description" name="Description">
                         </div>
                         <br />
-                        <div class="form-group">
-                            <label for="image">Image:</label>
-                            <input type="text" class="form-control" id="image" name="Image">
-                        </div>
-                        <br />
+
                         <div class="form-group">
                             <label >ProductStatus Id:</label>
                             <select name="ProductStatusId" class="form-control">
@@ -51,6 +51,7 @@
                             </select>                           
                         </div>  
                         <br />
+
                         <div class="form-group">
                             <label>Seller Id:</label>
                             <select name="SellerId" class="form-control">
@@ -62,6 +63,11 @@
                             </select>                           
                         </div>
                         <br />
+
+                        <div class="form-group">
+                            <label>Product Image:</label>
+                            <input type="file" class="form-control" name="file" accept="image/png, image/gif, image/jpeg" style="background-color:#808080"/>
+                        </div>
                         
 
                         <button type="submit" class="btn btn-success">Submit</button>

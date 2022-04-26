@@ -70,7 +70,7 @@ namespace ShoppingApplication.Controllers
             }
             return Redirect("/Home/Index");
         }
-/*
+
         // Add secure data...
         public User GetUser(HttpRequestBase request)
         {
@@ -80,6 +80,6 @@ namespace ShoppingApplication.Controllers
 
             return db.Users.Where(x => x.AccessToken == AccessToken).FirstOrDefault();
 
-        }*/
+        }
     }
 }
